@@ -344,17 +344,31 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       max: 5,
     };
 
+    const errMsg = document.getElementById("error")! as HTMLElement;
     //if either of this is false, return an alert
-    if (
-      !validate(titleValidatable) ||
-      !validate(descriptionValidatable) ||
-      !validate(peopleValidatble)
-    ) {
-      alert("Invalid input! please try again");
-      return;
-    } else {
-      return [enteredTitle, enteredDescription, +enteredPeople];
-    }
+    // if (
+    //   !validate(titleValidatable) ||
+    //   !validate(descriptionValidatable) ||
+    //   !validate(peopleValidatble)
+    // ) {
+    //   alert("Invalid input! please try again");
+    //   return;
+    // } else {
+    //   return [enteredTitle, enteredDescription, +enteredPeople];
+    // }
+    if (!validate(titleValidatable)) {
+      errMsg.innerHTML = "Enter valid title";
+      document.getElementById("error")!.style.visibility = "visible";
+      document.getElementById("error")!.style.display = "block";
+    } else if (!validate(descriptionValidatable)) {
+      errMsg.innerHTML = "Enter valid description";
+      document.getElementById("error")!.style.visibility = "visible";
+      document.getElementById("error")!.style.display = "block";
+    } else if (!validate(peopleValidatble)) {
+      errMsg.innerHTML = "Enter valid number of people";
+      document.getElementById("error")!.style.visibility = "visible";
+      document.getElementById("error")!.style.display = "block";
+    } else return [enteredTitle, enteredDescription, +enteredPeople];
   }
 
   private clearInputs() {
@@ -372,6 +386,8 @@ class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
       const [title, desc, people] = userInput;
       projectState.addProject(title, desc, people);
       this.clearInputs();
+      document.getElementById("error")!.style.visibility = "hidden";
+      document.getElementById("error")!.style.display = "none";
     }
   }
 }
