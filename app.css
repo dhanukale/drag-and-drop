@@ -126,3 +126,13 @@ button:active {
   border: 1px solid #ff0062;
   background: #f7f7f7;
 }
+
+.errorMessages {
+  display: block;
+  margin: 1rem;
+  border: 1px solid #a80041;
+  padding: 1rem;
+  visibility: hidden;
+  display: none;
+  background-color: #eba8c1;
+}
