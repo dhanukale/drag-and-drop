@@ -234,15 +234,24 @@ class ProjectInput extends Component {
             min: 1,
             max: 5,
         };
-        if (!validate(titleValidatable) ||
-            !validate(descriptionValidatable) ||
-            !validate(peopleValidatble)) {
-            alert("Invalid input! please try again");
-            return;
+        const errMsg = document.getElementById("error");
+        if (!validate(titleValidatable)) {
+            errMsg.innerHTML = "Enter valid title";
+            document.getElementById("error").style.visibility = "visible";
+            document.getElementById("error").style.display = "block";
         }
-        else {
+        else if (!validate(descriptionValidatable)) {
+            errMsg.innerHTML = "Enter valid description";
+            document.getElementById("error").style.visibility = "visible";
+            document.getElementById("error").style.display = "block";
+        }
+        else if (!validate(peopleValidatble)) {
+            errMsg.innerHTML = "Enter valid number of people";
+            document.getElementById("error").style.visibility = "visible";
+            document.getElementById("error").style.display = "block";
+        }
+        else
             return [enteredTitle, enteredDescription, +enteredPeople];
-        }
     }
     clearInputs() {
         this.titleInputElement.value = "";
@@ -256,6 +265,8 @@ class ProjectInput extends Component {
             const [title, desc, people] = userInput;
             projectState.addProject(title, desc, people);
             this.clearInputs();
+            document.getElementById("error").style.visibility = "hidden";
+            document.getElementById("error").style.display = "none";
         }
     }
 }
